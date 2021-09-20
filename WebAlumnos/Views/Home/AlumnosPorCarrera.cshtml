@@ -1,0 +1,39 @@
+﻿
+
+@model IEnumerable<Alumno>
+@{
+    ViewData["Title"] = "AlumnosPorCarrera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<Carrera> carreras
+        = ViewBag.Carreras;
+}
+
+<h2>@ViewData["Hora"]</h2>
+<form method="post" asp-action="AlumnosPorCarrera">
+    <select id="clave" name="clave">
+
+        @foreach (var carrera in carreras)
+        {
+            <option  value=@carrera.Clave>@carrera.Nombre</option>
+        }
+
+    </select>
+    <input type="submit" value="Filtrar"/>
+</form>
+<table>
+    <thead class="tabla1">
+        <tr>
+            <th>Núm. control</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alumno in Model)
+        {
+        <tr>
+            <td>@alumno.Control</td>
+            <td>@string.Concat(alumno.Paterno, " ", alumno.Materno, ", ", alumno.Nombre)</td>
+        </tr>
+        }
+    </tbody>
+</table>

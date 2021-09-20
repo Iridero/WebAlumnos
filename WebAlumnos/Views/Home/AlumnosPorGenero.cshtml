@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Alumno>
+@{
+    ViewData["Title"] = "AlumnosPorGenero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="AlumnosPorGenero">
+    <div>
+        @if (ViewBag.RadioSelect == "*")
+        {
+            <label><input type="radio" checked="checked" value="*" name="sexo" />Todos</label> }
+        else
+        {
+            <label><input type="radio" value="*" name="sexo" />Todos</label>
+        }
+        @if (ViewBag.RadioSelect == "F")
+        {
+            <label><input type="radio" checked="checked" value="F" name="sexo" />Mujeres</label>
+        }
+        else
+        {
+            <label><input type="radio" value="F" name="sexo" />Mujeres</label>
+        }
+        @if (ViewBag.RadioSelect == "M")
+        {
+            <label><input type="radio" checked="checked" value="M" name="sexo" />Hombres</label>
+        }
+        else
+        {
+            <label><input type="radio" value="M" name="sexo" />Hombres</label>
+        }
+    </div>
+    <input type="submit" value="Filtrar"/>
+
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>Num. control </td>
+            <td>Nombre</td>
+            <td>Carrera</td>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var alumno in Model)
+       {
+           <tr>
+               <td>@alumno.Control</td>
+               <td>@string.Concat(alumno.Paterno," ", alumno.Materno,", ",alumno.Nombre) </td>
+               <td>@alumno.Idcarrera</td>
+           </tr>
+       }
+    </tbody>
+</table>
+
